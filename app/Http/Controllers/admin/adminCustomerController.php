@@ -59,7 +59,10 @@ class adminCustomerController extends Controller
      */
     public function show(string $id)
     {
-        //
+        //here is for delete
+        $model = customer::find($id)->delete();
+        \Illuminate\Support\Facades\Session::flash('model-delete', 'Your record deleted successfully!');
+        return redirect()->back();
     }
 
     /**
@@ -67,7 +70,10 @@ class adminCustomerController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $model = customer::find($id);
+        $phoneUtil = \libphonenumber\PhoneNumberUtil::getInstance();
+        $countries = $phoneUtil->getSupportedRegions();
+        return view('admin.customer.edit', compact('model', 'countries'));
     }
 
     /**
@@ -75,7 +81,25 @@ class adminCustomerController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        //validate phone number:
+        $phoneNumber = $request->phoneNumber;
+        $phoneUtil = \libphonenumber\PhoneNumberUtil::getInstance();
+        $parsdata = $phoneUtil->parse($phoneNumber, "$request->country");
+        $isValid = $phoneUtil->isValidNumber($parsdata);
+        if (!$isValid) {
+            throw ValidationException::withMessages(['phoneNumber', 'You have enterd a invalid phoneNumber']);
+        }
+        $model = customer::find($id);
+        $model->firstname = $request->firstname;
+        $model->lastname = $request->lastname;
+        $model->dataOfBirth = $request->dataOfBirth;
+        $model->phoneNumber = $request->phoneNumber;
+        $model->country = $request->country;
+        $model->bankAcNumber = $request->bankAcNumber;
+        $model->email = $request->email;
+        $model->save();
+        \Illuminate\Support\Facades\Session::flash('model-edited', 'Your record edited successfully!');
+        return redirect()->back();
     }
 
     /**
@@ -83,6 +107,6 @@ class adminCustomerController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return $id;
     }
 }

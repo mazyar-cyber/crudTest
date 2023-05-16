@@ -19,10 +19,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/', function () {
-    return view('admin.layouts.master');
+Route::middleware('auth')->group(function () {
+    Route::get('/', function () {
+        return view('admin.layouts.master');
+    });
+    Route::resource('customer', adminCustomerController::class);
 });
-Route::resource('customer', adminCustomerController::class);
+
 Route::get('test', function () {
     // $phoneNumber = '0989914807848';
     // $phoneUtil = PhoneNumberUtil::getInstance();
@@ -46,4 +49,12 @@ Route::get('test', function () {
         return 'it is false';
     }
     return ($isValid); // true
+});
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('logout',function(){
+    Auth::logout();
+    return redirect()->to('/');
 });

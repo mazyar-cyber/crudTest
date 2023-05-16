@@ -3,6 +3,12 @@
     <!-- Basic Tables start -->
     <div class="row" id="basic-table">
         <div class="col-12">
+            @if (\Illuminate\Support\Facades\Session::has('model-delete'))
+                <div class="alert alert-success">
+                    {{ session('model-delete') }}
+                </div>
+            @endif
+
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Table Basic</h4>
@@ -28,7 +34,7 @@
                                     </td>
                                     <td>{{ $d->firstname }}</td>
                                     <td>
-                                        <span>{{ $d->firstname }}</span>
+                                        <span>{{ $d->lastname }}</span>
                                     </td>
                                     <td>{{ $d->dataOfBirth }}</td>
                                     <td>
@@ -39,11 +45,11 @@
                                     </td>
                                     <td>
 
-                                        <a class="dropdown-item" href="#">
+                                        <a class="dropdown-item" href="{{ route('customer.edit', $d->id) }}">
                                             <i data-feather="edit-2" class="me-50"></i>
                                             <span>Edit</span>
                                         </a>
-                                        <a class="dropdown-item" href="#">
+                                        <a class="dropdown-item" href="{{ route('customer.destroy', $d->id) }}">
                                             <i data-feather="trash" class="me-50"></i>
                                             <span>Delete</span>
                                         </a>

@@ -340,7 +340,7 @@
                             Settings</a><a class="dropdown-item" href="page-pricing.html"><i class="me-50"
                                 data-feather="credit-card"></i> Pricing</a><a class="dropdown-item"
                             href="page-faq.html"><i class="me-50" data-feather="help-circle"></i> FAQ</a><a
-                            class="dropdown-item" href="auth-login-cover.html"><i class="me-50"
+                            class="dropdown-item" href="/logout"><i class="me-50"
                                 data-feather="power"></i> Logout</a>
                     </div>
                 </li>
