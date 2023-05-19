@@ -51,6 +51,7 @@ class adminCustomerController extends Controller
         $model->bankAcNumber = $request->bankAcNumber;
         $model->email = $request->email;
         $model->save();
+        \Illuminate\Support\Facades\Session::flash('model-create', 'Your record created successfully!');
         return redirect()->back();
     }
 
@@ -108,5 +109,10 @@ class adminCustomerController extends Controller
     public function destroy(string $id)
     {
         return $id;
+    }
+    public function deleteCustomer($id)
+    {
+        $model = customer::find($id)->delete();
+        \Illuminate\Support\Facades\Session::flash('model-delete', 'Your record deleted successfully!');
     }
 }

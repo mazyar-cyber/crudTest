@@ -2,17 +2,23 @@
 @section('content')
     <!-- Basic multiple Column Form section start -->
     <section id="multiple-column-form">
-        <div class="row">
+        <div class="row" id="app">
             <div class="col-12">
                 @if ($errors->any())
                     {!! implode('', $errors->all('<div style="color: red" class="col-sm-10 is-invalid">:message</div>')) !!}
                 @endif
+                @if (\Illuminate\Support\Facades\Session::has('model-create'))
+                    <div class="alert alert-success">
+                        {{ session('model-create') }}
+                    </div>
+                @endif
+
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">Create Customer</h4>
                     </div>
                     <div class="card-body">
-                        <form class="form" action="{{ route('customer.store') }}" method="post">
+                        <form id="demoForm" class="form" action="{{ route('customer.store') }}" method="post">
                             @csrf
                             <div class="row">
                                 <div class="col-md-6 col-12">
@@ -66,13 +72,10 @@
                                             placeholder="example: mazyarmg7731@gmail.com" />
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-12">
-                                    <div class="mb-1">
-                                        <label class="form-label" for="email-id-column">Bank Account Number</label>
-                                        <input type="text" id="email-id-column" class="form-control" name="bankAcNumber"
-                                            placeholder="Bank Account Number" />
-                                    </div>
-                                </div>
+
+                                <example-component></example-component>
+
+
                                 <div class="col-12">
                                     <button class="btn btn-primary me-1">Submit</button>
                                     <button type="reset" class="btn btn-outline-secondary">Reset</button>
@@ -85,4 +88,31 @@
         </div>
     </section>
     <!-- Basic Floating Label Form section end -->
+@endsection
+@section('script')
+    <script>
+        // import  iban  from '@form-validation/validator-iban';
+        // var FormValidation=document.FormValidation();
+        document.addEventListener('DOMContentLoaded', function(e) {
+
+            // const res1 = iban().validate({
+            //     value: 'AT611904300234573201',
+            //     options: {
+            //         message: 'The value is not a valid IBAN',
+            //     },
+            // });
+            FormValidation.formValidation(document.getElementById('demoForm'), {
+                fields: {
+                    bankAcNumber: {
+                        validators: {
+                            iban: {
+                                message: 'The value is not a valid IBAN',
+                            },
+                        },
+                    },
+                },
+
+            });
+        });
+    </script>
 @endsection

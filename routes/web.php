@@ -1,8 +1,14 @@
 <?php
 
 use App\Http\Controllers\admin\adminCustomerController;
+use App\Http\Controllers\MainController;
+use App\Http\Controllers\user\SettingController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use libphonenumber\PhoneNumberUtil;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Validator;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,10 +26,19 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', function () {
-        return view('admin.layouts.master');
+
+    Route::prefix('api')->group(function () {
+        Route::post('validate', [SettingController::class,'validator']);
+        Route::post('deleteCustomer/{id}', [adminCustomerController::class,'deleteCustomer']);
     });
+
+
+
+    Route::get('/',[MainController::class,'index']);
     Route::resource('customer', adminCustomerController::class);
+    Route::get('setting', [SettingController::class, 'create'])->name('setting');
+    Route::post('changePassword', [SettingController::class, 'changePassword'])->name('changePassword');
+    Route::post('deleteAccount', [SettingController::class, 'deleteAC'])->name('deleteAc');
 });
 
 Route::get('test', function () {
@@ -54,7 +69,7 @@ Route::get('test', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('logout',function(){
+Route::get('logout', function () {
     Auth::logout();
     return redirect()->to('/');
 });

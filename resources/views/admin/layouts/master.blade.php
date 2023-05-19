@@ -7,11 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
     <meta name="description"
-        content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+        content="Rayankar admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords"
-        content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
+        content="admin template, Rayankar admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
-    <title>Dashboard ecommerce - Vuexy - Bootstrap HTML admin template</title>
+    <title>Dashboard ecommerce - Rayankar - Bootstrap HTML admin template</title>
     <link rel="apple-touch-icon" href="/app-assets/images/ico/apple-icon-120.png">
     <link rel="shortcut icon" type="image/x-icon" href="/app-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600"
@@ -42,6 +42,9 @@
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
     <!-- END: Custom CSS-->
+    <script src="{{ asset('js/app.js') }}"></script>
+    <link rel="stylesheet" href="sweetalert2.min.css">
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
 </head>
 <!-- END: Head-->
@@ -105,7 +108,7 @@
                             data-feather="search"></i></a>
                     <div class="search-input">
                         <div class="search-input-icon"><i data-feather="search"></i></div>
-                        <input class="form-control input" type="text" placeholder="Explore Vuexy..."
+                        <input class="form-control input" type="text" placeholder="Explore Rayankar..."
                             tabindex="-1" data-search="search">
                         <div class="search-input-close"><i data-feather="x"></i></div>
                         <ul class="search-list search-list-main"></ul>
@@ -323,25 +326,18 @@
                 <li class="nav-item dropdown dropdown-user"><a class="nav-link dropdown-toggle dropdown-user-link"
                         id="dropdown-user" href="#" data-bs-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
-                        <div class="user-nav d-sm-flex d-none"><span class="user-name fw-bolder">John Doe</span><span
+                        <div class="user-nav d-sm-flex d-none"><span
+                                class="user-name fw-bolder">{{ Auth::user()->name }}</span><span
                                 class="user-status">Admin</span></div><span class="avatar"><img class="round"
                                 src="/app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40"
                                 width="40"><span class="avatar-status-online"></span></span>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-user"><a
-                            class="dropdown-item" href="page-profile.html"><i class="me-50"
-                                data-feather="user"></i> Profile</a><a class="dropdown-item" href="app-email.html"><i
-                                class="me-50" data-feather="mail"></i> Inbox</a><a class="dropdown-item"
-                            href="app-todo.html"><i class="me-50" data-feather="check-square"></i> Task</a><a
-                            class="dropdown-item" href="app-chat.html"><i class="me-50"
-                                data-feather="message-square"></i> Chats</a>
-                        <div class="dropdown-divider"></div><a class="dropdown-item"
-                            href="page-account-settings-account.html"><i class="me-50" data-feather="settings"></i>
-                            Settings</a><a class="dropdown-item" href="page-pricing.html"><i class="me-50"
-                                data-feather="credit-card"></i> Pricing</a><a class="dropdown-item"
-                            href="page-faq.html"><i class="me-50" data-feather="help-circle"></i> FAQ</a><a
-                            class="dropdown-item" href="/logout"><i class="me-50"
-                                data-feather="power"></i> Logout</a>
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-user">
+                        <div class="dropdown-divider"></div><a class="dropdown-item" href="{{ route('setting') }}"><i
+                                class="me-50" data-feather="settings"></i>
+                            Settings</a>
+                        <a class="dropdown-item" href="/logout"><i class="me-50" data-feather="power"></i>
+                            Logout</a>
                     </div>
                 </li>
             </ul>
@@ -404,7 +400,8 @@
                     <div class="avatar me-75"><img src="/app-assets/images/portrait/small/avatar-s-8.jpg"
                             alt="png" height="32"></div>
                     <div class="search-data">
-                        <p class="search-data-title mb-0">John Doe</p><small class="text-muted">UI designer</small>
+                        <p class="search-data-title mb-0">{{ Auth::user()->name }}</p><small class="text-muted">UI
+                            designer</small>
                     </div>
                 </div>
             </a></li>
@@ -457,7 +454,7 @@
         <div class="navbar-header">
             <ul class="nav navbar-nav flex-row">
                 <li class="nav-item me-auto"><a class="navbar-brand"
-                        href="/html/ltr/vertical-menu-template-dark/index.html"><span class="brand-logo">
+                        href="/"><span class="brand-logo">
                             <svg viewbox="0 0 139 95" version="1.1" xmlns="http://www.w3.org/2000/svg"
                                 xmlns:xlink="http://www.w3.org/1999/xlink" height="24">
                                 <defs>
@@ -496,7 +493,7 @@
                                     </g>
                                 </g>
                             </svg></span>
-                        <h2 class="brand-text">Vuexy</h2>
+                        <h2 class="brand-text">Rayankar</h2>
                     </a></li>
                 <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pe-0"
                         data-bs-toggle="collapse"><i class="d-block d-xl-none text-primary toggle-icon font-medium-4"
@@ -508,14 +505,13 @@
         <div class="shadow-bottom"></div>
         <div class="main-menu-content">
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-                <li class=" nav-item"><a class="d-flex align-items-center" href="index.html"><i
+                <li class=" nav-item"><a class="d-flex align-items-center" href="/"><i
                             data-feather="home"></i><span class="menu-title text-truncate"
                             data-i18n="Dashboards">Dashboards</span><span
                             class="badge badge-light-warning rounded-pill ms-auto me-1">2</span></a>
                     <ul class="menu-content">
-                        <li><a class="d-flex align-items-center" href="/"><i
-                                    data-feather="circle"></i><span class="menu-item text-truncate"
-                                    data-i18n="Analytics">Analytics</span></a>
+                        <li><a class="d-flex align-items-center" href="/"><i data-feather="circle"></i><span
+                                    class="menu-item text-truncate" data-i18n="Analytics">Analytics</span></a>
                         </li>
                     </ul>
                 </li>
@@ -567,8 +563,8 @@
     <!-- BEGIN: Footer-->
     <footer class="footer footer-static footer-light">
         <p class="clearfix mb-0"><span class="float-md-start d-block d-md-inline-block mt-25">COPYRIGHT &copy;
-                2021<a class="ms-25" href="https://1.envato.market/pixinvent_portfolio"
-                    target="_blank">Pixinvent</a><span class="d-none d-sm-inline-block">, All rights
+                2021<a class="ms-25" href="https://rayankar.com"
+                    target="_blank">Rayankar</a><span class="d-none d-sm-inline-block">, All rights
                     Reserved</span></span><span class="float-md-end d-none d-md-block">Hand-crafted & Made with<i
                     data-feather="heart"></i></span></p>
     </footer>
@@ -582,7 +578,7 @@
 
     <!-- BEGIN: Page Vendor JS-->
     <script src="/app-assets/vendors/js/charts/apexcharts.min.js"></script>
-    <script src="/app-assets/vendors/js/extensions/toastr.min.js"></script>
+    {{-- <script src="/app-assets/vendors/js/extensions/toastr.min.js"></script> --}}
     <!-- END: Page Vendor JS-->
 
     <!-- BEGIN: Theme JS-->
@@ -593,6 +589,15 @@
     <!-- BEGIN: Page JS-->
     <script src="/app-assets/js/scripts/pages/dashboard-ecommerce.js"></script>
     <!-- END: Page JS-->
+    {{-- form validation --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.3/es6-shim.min.js"></script>
+    {{-- <script src="/vendors/@form-validation/umd/bundle/popular.min.js"></script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {{-- <script src="sweetalert2.min.js"></script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
+        integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 
     <script>
         $(window).on('load', function() {
@@ -604,6 +609,8 @@
             }
         })
     </script>
+
+    @yield('script')
 </body>
 <!-- END: Body-->
 
